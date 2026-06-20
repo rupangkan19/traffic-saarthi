@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark theme (default) */
+.theme-dark {
+  --bg: #0A1520;
+  --surface: #0C1219;
+  --surface-2: #131F2B;
+  --surface-3: #1C2A38;
+  --border: #1E2D3D;
+  --border-strong: #2A3F55;
+  --text-primary: #E2E8F0;
+  --text-secondary: #8896A5;
+  --text-muted: #4A5568;
+  --sidebar-bg: #0C1219;
+  --sidebar-border: #18232F;
+  --sidebar-text: #8EA4B8;
+  --sidebar-label: #3A5068;
+  --card-bg: #131F2B;
+  --nav-active-bg: rgba(27,79,191,0.12);
+  --nav-inactive: #506578;
+  --nav-active-text: #FFFFFF;
+  --input-bg: #131F2B;
+  --input-border: #1E2D3D;
+  --input-text: #E2E8F0;
+  --accent: #1B4FBF;
+  --accent-hover: #163DA0;
+  --red: #C0392B;
+  --amber: #B7770D;
+  --green: #1A7F4B;
+  --section-nav: #0C1219;
+  --section-resources: #0B1A10;
+  --section-events: #0D1826;
+  --section-diversions: #130D1F;
+  --section-resources-border: #1A3A20;
+  --section-events-border: #1A2D48;
+  --section-diversions-border: #2A1840;
+}
+
+/* Light theme */
+.theme-light {
+  --bg: #F4F6FA;
+  --surface: #FFFFFF;
+  --surface-2: #F8F9FC;
+  --surface-3: #ECEFF5;
+  --border: #DDE1E7;
+  --border-strong: #B0B8C4;
+  --text-primary: #0F1923;
+  --text-secondary: #4A5568;
+  --text-muted: #8896A5;
+  --sidebar-bg: #FFFFFF;
+  --sidebar-border: #E2E8F0;
+  --sidebar-text: #4A5568;
+  --sidebar-label: #0F1923;
+  --card-bg: #FFFFFF;
+  --nav-active-bg: rgba(46, 134, 193, 0.1);
+  --nav-active-text: #2E86C1;
+  --nav-inactive: #64748B;
+  --input-bg: #FFFFFF;
+  --input-border: #DDE1E7;
+  --input-text: #0F1923;
+  --accent: #2E86C1;
+  --accent-hover: #1F51C6;
+  --red: #B03A2E;
+  --amber: #D35400;
+  --green: #27AE60;
+  --section-nav: #FFFFFF;
+  --section-resources: #F0FAF5;
+  --section-events: #EBF5FB;
+  --section-diversions: #F5EEF8;
+  --section-resources-border: #C3E6D8;
+  --section-events-border: #C3E6D8;
+  --section-diversions-border: #E2D5F2;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
