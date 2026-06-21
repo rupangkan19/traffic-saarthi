@@ -162,8 +162,8 @@ export default function Sidebar({ onLogIncident, onPlanEvent, isOpen, onClose }:
 
   return (
     <aside
-      className={`flex flex-col flex-shrink-0 fixed md:static z-50 md:z-auto transition-transform duration-300 ease-in-out ${
-        isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      className={`flex flex-col flex-shrink-0 fixed z-50 transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:z-auto ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
       style={{
         width: 240, height: '100vh', background: 'var(--sidebar-bg)',
