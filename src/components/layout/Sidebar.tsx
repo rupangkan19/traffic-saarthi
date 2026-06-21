@@ -10,7 +10,7 @@ interface SidebarProps {
 }
 
 // ── Icon helpers ─────────────────────────────────────────────────────────────
-const Icon = ({ d, stroke = 'currentColor', w = 14 }: { d: string | JSX.Element; stroke?: string; w?: number }) =>
+const Icon = ({ d, stroke = 'currentColor', w = 14 }: { d: string | React.ReactNode; stroke?: string; w?: number }) =>
   typeof d === 'string' ? (
     <svg width={w} height={w} viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
       <path d={d} />
@@ -30,7 +30,7 @@ const ChevronDown = ({ open }: { open: boolean }) => (
 function NavItem({
   to, label, icon, badge, accent,
 }: {
-  to: string; label: string; icon: JSX.Element;
+  to: string; label: string; icon: React.ReactNode;
   badge?: number | string; accent?: string;
 }) {
   return (
@@ -63,7 +63,7 @@ function NavItem({
 
 // ── NavButton (action, no route) ─────────────────────────────────────────────
 function NavButton({ label, icon, onClick, accent }: {
-  label: string; icon: JSX.Element; onClick?: () => void; accent?: string;
+  label: string; icon: React.ReactNode; onClick?: () => void; accent?: string;
 }) {
   return (
     <button
@@ -80,7 +80,7 @@ function NavButton({ label, icon, onClick, accent }: {
 function NavGroup({
   label, icon, children, defaultOpen = false, badge,
 }: {
-  label: string; icon: JSX.Element; children: React.ReactNode;
+  label: string; icon: React.ReactNode; children: React.ReactNode;
   defaultOpen?: boolean; badge?: number | string;
 }) {
   const [open, setOpen] = useState(defaultOpen);

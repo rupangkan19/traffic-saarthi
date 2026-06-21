@@ -63,6 +63,7 @@ export default function AlertCenter() {
       time: new Date(i.timeOfIncident).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
       location: i.corridor,
       acknowledged: false,
+      escalatedTo: undefined as string | undefined,
     }));
 
   const allAlerts = [...liveHighIncidents, ...alerts];

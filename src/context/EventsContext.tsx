@@ -96,9 +96,11 @@ export function EventsProvider({ children }: { children: ReactNode }) {
         } else {
           // Seed mock events into Supabase on first run
           const rows = MOCK_EVENTS.map(eventToRow);
-          supabase.from('events').insert(rows).then(({ error: e }) => {
-            if (e) console.warn('[Supabase] events seed error:', e.message);
-          });
+          if (supabase) {
+            supabase.from('events').insert(rows).then(({ error: e }) => {
+              if (e) console.warn('[Supabase] events seed error:', e.message);
+            });
+          }
           setRawEvents(MOCK_EVENTS);
         }
       });

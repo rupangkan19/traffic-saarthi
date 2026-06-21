@@ -172,7 +172,7 @@ export default function EventDebrief() {
                 contentStyle={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 6, fontSize: 12 }}
                 labelStyle={{ color: 'var(--text-primary)', fontWeight: 600 }}
                 itemStyle={{ color: 'var(--text-secondary)' }}
-                formatter={(v: number) => [`${v}%`, 'Congestion']}
+                formatter={(v: any) => [`${v}%`, 'Congestion']}
               />
               <Area
                 type="monotone"

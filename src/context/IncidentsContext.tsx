@@ -42,7 +42,7 @@ function rowToIncident(row: Record<string, unknown>): Incident {
     resolvedAt: row.resolved_at as string | undefined,
     resolutionTimeMin: row.resolution_time_min as number | undefined,
     impactScore: (row.impact_score as number) || 50,
-    impactLevel: (row.impact_level as string) || 'Medium',
+    impactLevel: (row.impact_level as ImpactLevel) || 'Medium',
     officerNotes: (row.officer_notes as Incident['officerNotes']) || [],
   };
 }
@@ -98,10 +98,11 @@ export function IncidentsProvider({ children }: { children: ReactNode }) {
         } else {
           // Table empty — seed with mock data once
           console.info('[Supabase] incidents table empty — seeding with mock data');
-          const rows = MOCK_INCIDENTS.map(incidentToRow);
-          supabase.from('incidents').insert(rows).then(({ error: e }) => {
-            if (e) console.warn('[Supabase] seed error:', e.message);
-          });
+          if (supabase) {
+            supabase.from('incidents').insert(rows).then(({ error: e }) => {
+              if (e) console.warn('[Supabase] seed error:', e.message);
+            });
+          }
           setRawIncidents(MOCK_INCIDENTS);
         }
         setIsLoading(false);
@@ -133,7 +134,7 @@ export function IncidentsProvider({ children }: { children: ReactNode }) {
       )
       .subscribe();
 
-    return () => { supabase.removeChannel(channel); };
+    return () => { if (supabase) supabase.removeChannel(channel); };
   }, []);
 
   // ── Compute active event-based road closures ───────────────────────────────
