@@ -7,7 +7,11 @@ import { usePanel } from './Layout';
 import { useAuth } from '../../context/AuthContext';
 import logo from '../../assets/logo.jpg';
 
-export default function Navbar() {
+interface NavbarProps {
+  onToggleSidebar?: () => void;
+}
+
+export default function Navbar({ onToggleSidebar }: NavbarProps) {
   const _navigate = useNavigate();
   const { activeCount, incidents } = useIncidentsContext();
   const { theme, toggleTheme } = useTheme();
@@ -47,10 +51,23 @@ export default function Navbar() {
     <nav className="flex items-center justify-between px-4 flex-shrink-0" style={{ height: 56, background: 'var(--surface)', borderBottom: '1px solid var(--border)' }}>
       {/* Left: branding */}
       <div className="flex items-center gap-3">
+        {/* Mobile Sidebar Hamburger Toggle Button */}
+        <button
+          onClick={onToggleSidebar}
+          className="md:hidden p-1.5 rounded hover:bg-[var(--surface-3)]"
+          style={{ color: 'var(--text-primary)', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+
         <img src={logo} alt="Logo" style={{ width: 32, height: 32, borderRadius: 4, objectFit: 'cover', border: '1px solid var(--border)' }} />
-        <div>
-          <div className="text-[16px] font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>Traffic Saarthi</div>
-          <div className="text-[12px] leading-tight" style={{ color: 'var(--text-secondary)' }}>Bengaluru Traffic Police</div>
+        <div className="hidden xs:block">
+          <div className="text-[14px] md:text-[16px] font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>Traffic Saarthi</div>
+          <div className="text-[10px] md:text-[12px] leading-tight" style={{ color: 'var(--text-secondary)' }}>Bengaluru Traffic Police</div>
         </div>
       </div>
 

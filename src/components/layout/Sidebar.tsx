@@ -7,6 +7,8 @@ import logo from '../../assets/logo.jpg';
 interface SidebarProps {
   onLogIncident?: () => void;
   onPlanEvent?: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 // ── Icon helpers ─────────────────────────────────────────────────────────────
@@ -124,7 +126,7 @@ const SectionLabel = ({ label }: { label: string }) => (
 );
 
 // ── Sidebar ──────────────────────────────────────────────────────────────────
-export default function Sidebar({ onLogIncident, onPlanEvent }: SidebarProps) {
+export default function Sidebar({ onLogIncident, onPlanEvent, isOpen, onClose }: SidebarProps) {
   const navigate = useNavigate();
   const { incidents } = useIncidents();
   const { events } = useEvents();
@@ -133,8 +135,8 @@ export default function Sidebar({ onLogIncident, onPlanEvent }: SidebarProps) {
   const highPriority = incidents.filter(i => i.status === 'active' && i.priority === 'High').length;
   const activeEvents = events.filter(e => e.status === 'active' || e.status === 'planned').length;
 
-  const handleLogIncident = () => { navigate('/'); onLogIncident?.(); };
-  const handlePlanEvent = () => { navigate('/'); onPlanEvent?.(); };
+  const handleLogIncident = () => { navigate('/'); onLogIncident?.(); onClose?.(); };
+  const handlePlanEvent = () => { navigate('/'); onPlanEvent?.(); onClose?.(); };
 
   // SVG icon paths
   const icons = {
@@ -160,23 +162,38 @@ export default function Sidebar({ onLogIncident, onPlanEvent }: SidebarProps) {
 
   return (
     <aside
-      className="flex flex-col flex-shrink-0"
+      className={`flex flex-col flex-shrink-0 fixed md:static z-50 md:z-auto transition-transform duration-300 ease-in-out ${
+        isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      }`}
       style={{
         width: 240, height: '100vh', background: 'var(--sidebar-bg)',
         borderRight: '1px solid var(--sidebar-border)', overflowY: 'auto', overflowX: 'hidden',
       }}
     >
       {/* Brand */}
-      <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--sidebar-border)', display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-        <img src={logo} alt="Logo" style={{ width: 28, height: 28, borderRadius: 4, objectFit: 'cover', border: '1px solid var(--border)' }} />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: 'var(--text-primary)', textTransform: 'uppercase', lineHeight: 1 }}>Traffic Saarthi</span>
-          <span style={{ fontSize: 9, color: 'var(--sidebar-text)', fontWeight: 500, lineHeight: 1 }}>Bengaluru Command Center</span>
+      <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--sidebar-border)', display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0, justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <img src={logo} alt="Logo" style={{ width: 28, height: 28, borderRadius: 4, objectFit: 'cover', border: '1px solid var(--border)' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: 'var(--text-primary)', textTransform: 'uppercase', lineHeight: 1 }}>Traffic Saarthi</span>
+            <span style={{ fontSize: 9, color: 'var(--sidebar-text)', fontWeight: 500, lineHeight: 1 }}>Bengaluru Command Center</span>
+          </div>
         </div>
+        {/* Mobile Close Button */}
+        <button
+          onClick={onClose}
+          className="md:hidden p-1 rounded hover:bg-[var(--surface-3)]"
+          style={{ color: 'var(--text-secondary)', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
       </div>
 
       {/* Nav */}
-      <nav style={{ flex: 1, paddingTop: 6, paddingBottom: 8, display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <nav onClick={() => { if (window.innerWidth < 768) onClose?.(); }} style={{ flex: 1, paddingTop: 6, paddingBottom: 8, display: 'flex', flexDirection: 'column', gap: 1 }}>
 
         {/* Dashboard */}
         <NavItem to="/" label="Dashboard" icon={icons.home} />

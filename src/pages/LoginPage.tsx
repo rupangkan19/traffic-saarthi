@@ -13,8 +13,8 @@ interface Particle {
 
 export default function LoginPage() {
   const { login } = useAuth();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('user1');
+  const [password, setPassword] = useState('traffic123');
   const [error, setError] = useState('');
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
