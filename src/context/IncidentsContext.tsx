@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
-import type { Incident, IncidentCause, IncidentStatus, Priority } from '../types';
+import type { Incident, IncidentCause, IncidentStatus, Priority, ImpactLevel } from '../types';
 import { MOCK_INCIDENTS } from '../data/mockIncidents';
 import { useEvents } from './EventsContext';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
@@ -99,6 +99,7 @@ export function IncidentsProvider({ children }: { children: ReactNode }) {
           // Table empty — seed with mock data once
           console.info('[Supabase] incidents table empty — seeding with mock data');
           if (supabase) {
+            const rows = MOCK_INCIDENTS.map(incidentToRow);
             supabase.from('incidents').insert(rows).then(({ error: e }) => {
               if (e) console.warn('[Supabase] seed error:', e.message);
             });
