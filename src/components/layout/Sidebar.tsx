@@ -171,25 +171,12 @@ export default function Sidebar({ onLogIncident, onPlanEvent, isOpen, onClose }:
       }}
     >
       {/* Brand */}
-      <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--sidebar-border)', display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0, justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src={logo} alt="Logo" style={{ width: 28, height: 28, borderRadius: 4, objectFit: 'cover', border: '1px solid var(--border)' }} />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: 'var(--text-primary)', textTransform: 'uppercase', lineHeight: 1 }}>Traffic Saarthi</span>
-            <span style={{ fontSize: 9, color: 'var(--sidebar-text)', fontWeight: 500, lineHeight: 1 }}>Bengaluru Command Center</span>
-          </div>
+      <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--sidebar-border)', display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+        <img src={logo} alt="Logo" style={{ width: 28, height: 28, borderRadius: 4, objectFit: 'cover', border: '1px solid var(--border)' }} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: 'var(--text-primary)', textTransform: 'uppercase', lineHeight: 1 }}>Traffic Saarthi</span>
+          <span style={{ fontSize: 9, color: 'var(--sidebar-text)', fontWeight: 500, lineHeight: 1 }}>Bengaluru Command Center</span>
         </div>
-        {/* Mobile Close Button */}
-        <button
-          onClick={onClose}
-          className="md:hidden p-1 rounded hover:bg-[var(--surface-3)]"
-          style={{ color: 'var(--text-secondary)', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-        >
-          <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
       </div>
 
       {/* Nav */}
